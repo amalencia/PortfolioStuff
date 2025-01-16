@@ -41,21 +41,20 @@ setQualData(qualificationsData, ".qualification__education");
 
 const PorfolioImgLink = "assets/img/Test/";
 const portfolioItems = [
-  {
-    src: PorfolioImgLink + "TestScreensho.jpg",
-    title: "Save the Galaxy!",
-    description:
-      "One of the first complete demos that I completed.  It's inspired by Asteroids and Galaga.  <br>All of the art is self-made and was a labor of love.  <br>I hope to continue updating to include rogue-like elements similar to Slay the Spire, custom music, and higher difficulties",
-    link: "https://github.com/amalencia",
-    playLink: "https://amalencia.itch.io",
-  },
-  {
-    src: PorfolioImgLink + "TestScreensho.jpg",
-    title: "Portal Clone",
-    description:
-      "In a team of four members, we worked together on a group projecet to develop a 3D Puzzle Platformer <br>The experience introduced me and got me experienced with Github. <br>Attached is my portion of the project, which is a Portal Clone.<br>This clone was a labor of love where I became experienced with shaders and cameras within Unity.",
-    link: "https://github.com/amalencia",
-  },
+	{ 
+	title: "Save the Galaxy!",
+	src_itch: "https://amalencia.itch.io/savethegalaxy",
+	src_embed: "https://itch.io/embed/3229218?",
+	description: "This is one of my earliest Unity projects!  It showcases basic Unity 2D skills.",
+	gitLink: "https://github.com/amalencia/SaveTheGalaxy0",
+	},
+	{ 
+	title: "Portal_Clone",
+	src_itch: "https://amalencia.itch.io/portal-clone",
+	src_embed: "https://itch.io/embed/3246788?",
+	description: "This is a Portal Clone!  It showcases basic 3D and shader skills",
+	gitLink: "https://github.com/amalencia/PuzzleProject",
+	},
 ];
 
 /*==================== MENU SHOW Y HIDDEN ====================*/
@@ -252,7 +251,7 @@ function initSwiper() {
   let swiper = new Swiper(".portfolio__container", {
     watchOverflow: true,
     loop: false,
-    spaceBetween: 20,
+    spaceBetween: 10,
     pagination: {
       el: ".swiper-pagination",
       clickable: true,
@@ -260,16 +259,16 @@ function initSwiper() {
     mousewheel: true,
     // Responsive breakpoints
     autoplay: {
-      delay: 1000, 
+      delay: 7000, 
       disableOnInteraction: true, 
     },
     breakpoints: {
       // When window width is >= 768px
       568: {
-        slidesPerView: 2, // Display 2 slides per view
-        centeredSlides: false,
+        slidesPerView: 1, // Display 2 slides per view
+        centeredSlides: true,
 
-        slidesPerGroup: 2,
+        slidesPerGroup: 1,
         spaceBetween: 15,
       },
     },
@@ -279,31 +278,24 @@ function initSwiper() {
 
 const container = document.querySelector(".swiper-wrapper");
 portfolioItems.forEach((item) => {
-  const playLink = item.playLink
-    ? `<a href="${item.playLink}" target="_blank" class="button button--flex button--small portfolio__button">
-          Play&nbsp
-          <i class="uil uil-play button__icon"></i>
-        </a>`
-    : "";
-  const Link = item.link
-    ? `<a href="${item.link}" target="_blank" class="button button--flex button--small portfolio__buttons portfolio__button">
-                  Doc&nbsp
+	const Link = item.gitLink
+    ? `<a href="${item.gitLink}" target="_blank" class="button button--flex button--small portfolio__buttons portfolio__button">
+                  Git&nbsp
                   <i class="uil uil-arrow-right button__icon"></i>
               </a>`
     : "";
   const html = `
       <div class="portfolio__content  grid swiper-slide">
+	  <div class="portfolio__imgcontainer">
 
-         <div class ="portfolio__imgcontainer"> <img src="${item.src}" alt="" class="portfolio__img" loading="lazy"> </div>
-          <div class="portfolio__data">
-              <h3 class="portfolio__title">${item.title}</h3>
+<iframe frameborder="0" src="${item.src_embed}border_width=5&bg_color=62C2D5&fg_color=000000&border_color=6b0b0b" width="550" height="167"><a href="${item.src_itch}">${item.description}</a></iframe>
+	  </div>
+	  <div class="portfolio__data">
+	                <h3 class="portfolio__title">${item.title}</h3>
               <p class="portfolio__description">${item.description}</p>
-              ${Link}
-              ${playLink}
-          </div>
-      </div>
+			  ${Link}
+	  </div>
   `;
-
   container.innerHTML += html;
 });
 initSwiper();
